@@ -1240,6 +1240,7 @@
       if (this.$el) this.undelegateEvents();
       this.$el = element instanceof Backbone.$ ? element : Backbone.$(element);
       this.el = this.$el[0];
+      this.$delegateElement = this.$el;
       if (delegate !== false) this.delegateEvents();
       return this;
     },
@@ -1271,9 +1272,9 @@
         method = _.bind(method, this);
         eventName += '.delegateEvents' + this.cid;
         if (selector === '') {
-          this.$el.bind(eventName, method);
+          this.$delegateElement.bind(eventName, method);
         } else {
-          this.$el.delegate(selector, eventName, method);
+          this.$delegateElement.delegate(selector, eventName, method);
         }
       }
     },
